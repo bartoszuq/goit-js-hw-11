@@ -4,15 +4,15 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const loading = document.querySelector('.load');
-loading.classList.add('is-hidden');
-const apiKey = '36752814-0630461e212967e8c9b2204d7';
 const searchForm = document.querySelector('.search-form');
 const bodyOdy = document.querySelector('.gallery');
+loading.classList.add('is-hidden');
+const apiKey = '36752814-0630461e212967e8c9b2204d7';
+axios.defaults.baseURL = 'https://pixabay.com/api/';
+
 let lightbox;
 let page = 1;
 let q = '';
-
-axios.defaults.baseURL = 'https://pixabay.com/api/';
 
 async function getUl(userRequest, page) {
   const pictureArray = await axios.get(
@@ -62,6 +62,7 @@ function loadMorePics() {
     }
   });
 }
+
 function galeryCreator(e) {
   e.preventDefault();
   bodyOdy.innerHTML = '';
@@ -108,5 +109,6 @@ function galeryCreator(e) {
     }
   });
 }
+
 searchForm.addEventListener('submit', galeryCreator);
 loading.addEventListener('click', loadMorePics);
